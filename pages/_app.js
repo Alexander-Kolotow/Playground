@@ -1,10 +1,17 @@
-import GlobalStyle from "../styles";
+import GlobalStyle from '../styles';
+import useLocalStorageState from "use-local-storage-state"; 
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
+
+  const [serviceCards] = useLocalStorageState("serviceCards", { defaultValue: [] });
+
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <Component {...pageProps} serviceCards={serviceCards} />
     </>
   );
 }
+
+
+export default MyApp;
