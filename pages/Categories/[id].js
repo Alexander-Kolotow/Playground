@@ -21,7 +21,7 @@ const Headline = styled.h1`
   }
 `;
 
-const SubcategoryPage = ({ serviceCards }) => {
+const SubcategoryPage = ({ serviceCards, setServiceCards }) => {
 
   const router = useRouter();
   const { id } = router.query;
@@ -51,12 +51,14 @@ const SubcategoryPage = ({ serviceCards }) => {
       {filteredServiceCards.map((card) => (
         <ServiceProvider
           key={card.id}
-          firstName={card.firstName}
-          lastName={card.lastName}
-          skills={card.skills}
-          needs={card.needs}
-          email={card.email}
-          phone={card.phone}
+          card={card}
+          serviceCards={serviceCards}
+          handleEditServiceCard={(updatedServiceCard) => {
+            const updatedCards = serviceCards.map((sc) =>
+              sc.id === updatedServiceCard.id ? updatedServiceCard : sc
+            );
+            setServiceCards(updatedCards);
+          }}
         />
       ))}
     </>

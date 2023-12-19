@@ -22,31 +22,93 @@ const ServiceDetails = styled.div`
   margin-top: 10px;
 `;
 
-export default function ServiceProvider({ firstName, lastName, skills, needs, email, phone }) {
+export default function ServiceProvider({ card, handleEditServiceCard }) {
 
   const [showContactInfo, setShowContactInfo] = useState(false);
+  const [editedCard, setEditedCard] = useState(null);
 
   const toggleContactInfo = () => {
     setShowContactInfo(!showContactInfo);
   };
 
-  return (
-    <ServiceProviderWrapper>
-      <h2>{firstName} {lastName}</h2>
-      <p><strong>Skills:</strong> {skills}</p>
-      <p><strong>Needs:</strong> {needs}</p>
+  const handleEdit = (updatedServiceCard) => {
+    // Hier wird die aktuell bearbeitete Karte im lokalen State gesetzt
+    setEditedCard(updatedServiceCard);
+  };
+  const handleSave = () => {
+    // Übergebe die bearbeitete Karte an die Funktion zur Aktualisierung
+    handleEditServiceCard(editedCard);
 
-      {showContactInfo && (
-        <ServiceDetails>
-          <p><strong>Email:</strong> {email}</p>
-          <p><strong>Phone:</strong> {phone}</p>
-        </ServiceDetails>
-      )}
+    // Zurücksetzen der bearbeiteten Karte nach dem Speichern
+    setEditedCard(null);
+  };
 
-      <ServiceButton type="button" onClick={toggleContactInfo}>
-        {showContactInfo ? 'Hide Contact' : 'Show Contact'}
-      </ServiceButton>
-    </ServiceProviderWrapper>
-  );
-};
+return (
+  <ServiceProviderWrapper key={card.id}>
+        {editedCard && editedCard.id === card.id ? (
+          <div>
+            <h2>{card.firstName} {card.lastName}</h2>
+            <input
+              type="text"
+              value={editedCard.firstName}
+              onChange={(event) => setEditedCard({ ...editedCard, firstName: event.target.value })}
+            />
+          
+            <input
+              type="text"
+              value={editedCard.lastName}
+              onChange={(event) => setEditedCard({ ...editedCard, lastName: event.target.value })}
+            />
+          
+            <input
+              type="text"
+              value={editedCard.skills}
+              onChange={(event) => setEditedCard({ ...editedCard, skills: event.target.value })}
+            />
+            
+            <input
+              type="text"
+              value={editedCard.needs}
+              onChange={(event) => setEditedCard({ ...editedCard, needs: event.target.value })}
+            />
+            
+            <input
+              type="email"
+              value={editedCard.email}
+              onChange={(event) => setEditedCard({ ...editedCard, email: event.target.value })}
+            />
+            
+            <input
+              type="tel"
+              value={editedCard.phone}
+              onChange={(event) => setEditedCard({ ...editedCard, phone: event.target.value })}
+            />
 
+            <ServiceButton type="button" onClick={handleSave}>
+              Save
+            </ServiceButton>
+          </div>
+        ) : (
+          <div>
+            <h2>{card.firstName} {card.lastName}</h2>
+            <p><strong>Skills:</strong> {card.skills}</p>
+            <p><strong>Needs:</strong> {card.needs}</p>
+
+            {showContactInfo && (
+              <ServiceDetails>
+                <p><strong>Email:</strong> {card.email}</p>
+                <p><strong>Phone:</strong> {card.phone}</p>
+              </ServiceDetails>
+            )}
+
+            <ServiceButton type="button" onClick={toggleContactInfo}>
+              {showContactInfo ? 'Hide Contact' : 'Show Contact'}
+            </ServiceButton>
+            <br></br>
+            <ServiceButton type="button" onClick={() => handleEdit(card)}>
+              Edit
+            </ServiceButton>
+          </div>
+        )}
+  </ServiceProviderWrapper>
+)}

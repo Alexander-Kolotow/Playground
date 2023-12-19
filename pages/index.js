@@ -104,7 +104,7 @@ const Homepage = () => {
         ))}
       </ul>
 
-      <Link href="/form">
+      <Link href="/create-service-card-form">
       <CenteredButton>
           <CenteredLink>Make a Service Offer</CenteredLink>
         </CenteredButton>

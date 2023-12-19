@@ -10,10 +10,20 @@ export default function MyApp({ Component, pageProps }) {
     setServiceCards((prevServiceCards) => [...prevServiceCards, newServiceCard]);
   };
 
+  function handleEditServiceCard(updatedServiceCard) {
+    const updatedCards = serviceCards.map(card => {
+      if (card.id === updatedServiceCard.id) {
+        return updatedServiceCard;
+      }
+      return card;
+    });
+    setServiceCards(updatedCards);
+  };
+
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} serviceCards={serviceCards} handleAddServiceCards={handleAddServiceCards} />
+      <Component {...pageProps} serviceCards={serviceCards} setServiceCards={setServiceCards} handleEditServiceCard={handleEditServiceCard} handleAddServiceCards={handleAddServiceCards} />
     </>
   );
 }
