@@ -2,7 +2,6 @@ import Link from "next/link";
 import styled from "styled-components";
 import { categories } from "../../lib/data.js";
 import { useRouter } from "next/router";
-import React from 'react';
 import ServiceProvider from "@/components/ServiceCard/index.js";
 
 
@@ -13,7 +12,7 @@ const Header = styled.header`
   border-bottom: 1px solid #ccc;
 `;
 
-const BackLink = styled.h1`
+const Headline = styled.h1`
   color: #333;
   text-decoration: none;
   font-weight: bold;
@@ -45,7 +44,7 @@ const SubcategoryPage = ({ serviceCards }) => {
     <>
       <Header>
         <Link href="/">
-          <BackLink> &larr;{foundSubcategory.name}</BackLink>
+          <Headline> &larr;{foundSubcategory.name}</Headline>
         </Link>
       </Header>
 
