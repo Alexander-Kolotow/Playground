@@ -32,14 +32,12 @@ export default function ServiceProvider({ card, handleEditServiceCard }) {
   };
 
   const handleEdit = (updatedServiceCard) => {
-    // Hier wird die aktuell bearbeitete Karte im lokalen State gesetzt
     setEditedCard(updatedServiceCard);
   };
   const handleSave = () => {
-    // Übergebe die bearbeitete Karte an die Funktion zur Aktualisierung
     handleEditServiceCard(editedCard);
 
-    // Zurücksetzen der bearbeiteten Karte nach dem Speichern
+    // Zurücksetzen der Service Card nach dem Speichern!
     setEditedCard(null);
   };
 
