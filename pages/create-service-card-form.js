@@ -156,8 +156,8 @@ const resetForm = () => {
           required
         />
       
-      <SelectField name="category" onChange={(event) => handleChange(event)} required>
-        <option value="">Select Category</option>
+      <SelectField name="category" value={formData.category} onChange={(event) => handleChange(event)} required>
+        <option>Select Category</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}
