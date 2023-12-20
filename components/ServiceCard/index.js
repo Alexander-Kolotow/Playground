@@ -22,7 +22,7 @@ const ServiceDetails = styled.div`
   margin-top: 10px;
 `;
 
-export default function ServiceProvider({ card, handleEditServiceCard }) {
+export default function ServiceProvider({ card, serviceCards, setServiceCards }) {
 
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [editedCard, setEditedCard] = useState(null);
@@ -31,12 +31,18 @@ export default function ServiceProvider({ card, handleEditServiceCard }) {
     setShowContactInfo(!showContactInfo);
   };
 
+  function handleEditServiceCard(updatedServiceCard) {
+    const updatedCards = serviceCards.map(card =>
+      card.id === updatedServiceCard.id ? updatedServiceCard : card
+    );
+    setServiceCards(updatedCards);
+  }
+
   const handleEdit = (updatedServiceCard) => {
     setEditedCard(updatedServiceCard);
   };
   const handleSave = () => {
     handleEditServiceCard(editedCard);
-
     // Zurücksetzen der Service Card nach dem Speichern!
     setEditedCard(null);
   };

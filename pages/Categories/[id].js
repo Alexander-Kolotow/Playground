@@ -53,12 +53,7 @@ const SubcategoryPage = ({ serviceCards, setServiceCards }) => {
           key={card.id}
           card={card}
           serviceCards={serviceCards}
-          handleEditServiceCard={(updatedServiceCard) => {
-            const updatedCards = serviceCards.map((sc) =>
-              sc.id === updatedServiceCard.id ? updatedServiceCard : sc
-            );
-            setServiceCards(updatedCards);
-          }}
+          setServiceCards={setServiceCards}
         />
       ))}
     </>
@@ -66,3 +61,6 @@ const SubcategoryPage = ({ serviceCards, setServiceCards }) => {
 };
 
 export default SubcategoryPage;
+
+
+
